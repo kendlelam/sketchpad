@@ -6,7 +6,10 @@ function createDivs(numSquares) {
         newSquare.classList.add("grid-square");
         newSquare.style.height = 500/numSquares +'px';
         newSquare.addEventListener("mouseover", (event)=> {
-            newSquare.style["background-color"] = "black";
+            if (event.buttons == 1){
+                newSquare.style["background-color"] = "black";
+            }
+            
         });
         container.appendChild(newSquare);
     }
@@ -14,17 +17,31 @@ function createDivs(numSquares) {
 
 createDivs(16);
 
-let button = document.getElementsByClassName("prompt");
-button[0].addEventListener("click", askSquares)
+let button = document.getElementsByClassName("prompt")[0];
+button.addEventListener("click", askSquares);
+
+let clearButton = document.getElementsByClassName("pane")[0];
+clearButton.addEventListener("click", clearPad);
 
 function askSquares() {
-    let num = prompt("Enter number of squares for side of grid:");
+    let num = prompt("Enter number of squares for side of grid: (Maximum 100)");
     if (num){
-        while(container.firstChild) {
-            container.removeChild(container.firstChild);
+        if (num > 100) {
+            alert("Error: too high of a number.");
+        } else {
+            while(container.firstChild) {
+                container.removeChild(container.firstChild);
+            }
+            createDivs(num);
         }
-        createDivs(num);
+        
     }
 
 }
 
+function clearPad(){
+    let squares = container.children;
+    for (let i = 0; i < squares.length; i++){
+        squares[i].style["background-color"] = "white";
+    }
+}
