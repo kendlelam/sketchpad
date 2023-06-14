@@ -1,0 +1,19 @@
+.container{
+    width:500px;
+    display:flex;
+    flex-wrap:wrap;
+    border:1px solid black;
+}
+
+body{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+
+.grid-square{
+    box-sizing:border-box;
+    aspect-ratio: 1/1;
+}
