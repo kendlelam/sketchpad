@@ -1,5 +1,7 @@
 let container = document.getElementsByClassName("container")[0];
 
+createDivs(16);
+
 function createDivs(numSquares) {
     for (let i = 0; i < Math.pow(numSquares,2); i++){
         let newSquare = document.createElement("div");
@@ -11,11 +13,17 @@ function createDivs(numSquares) {
             }
             
         });
+        newSquare.addEventListener("click", (event)=> {
+
+                newSquare.style["background-color"] = "black";
+            
+        });
         container.appendChild(newSquare);
     }
 }
 
-createDivs(16);
+
+
 
 let button = document.getElementsByClassName("prompt")[0];
 button.addEventListener("click", askSquares);
@@ -24,10 +32,10 @@ let clearButton = document.getElementsByClassName("pane")[0];
 clearButton.addEventListener("click", clearPad);
 
 function askSquares() {
-    let num = prompt("Enter number of squares for side of grid: (Maximum 100)");
-    if (num){
-        if (num > 100) {
-            alert("Error: too high of a number.");
+    let num = prompt("Enter number of squares for side of grid: (Must be between 10 and 100)");
+    if (!isNaN(num)){
+        if (num > 100 || num < 10) {
+            alert("Out of bounds. Must be from 10 to 100");
         } else {
             while(container.firstChild) {
                 container.removeChild(container.firstChild);
